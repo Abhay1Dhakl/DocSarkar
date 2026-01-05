@@ -3,13 +3,13 @@ from typing import Dict, List, Set
 import logging
 
 from govscrape.config import ScrapeConfig
-from govscrape.io_utils import read_csv_dicts, write_csv_dicts, ensure_parent
+from govscrape.io_utils import read_csv_dicts, write_csv_dicts, ensure_path_exists
 from govscrape.http import HttpClient
 from govscrape.robots import allowed_by_robots
 from govscrape.extract import extract_links, split_doc_links
 
 def setup_logger(log_file: Path) -> None:
-    ensure_parent(log_file)
+    ensure_path_exists(log_file)
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s [%(levelname)s] %(message)s",

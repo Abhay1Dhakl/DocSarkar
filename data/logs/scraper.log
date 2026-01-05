@@ -1,0 +1,14 @@
+2026-01-05 23:10:04,427 [INFO] Seed: https://lawcommission.gov.np/pages/alphabetical-index-of-acts/
+2026-01-05 23:10:05,199 [INFO] Found 0 pdf links and 68 other links on seed page.
+2026-01-05 23:10:05,200 [INFO] Seed: https://lawcommission.gov.np/pages/list-volume-act/
+2026-01-05 23:10:08,729 [INFO] Found 0 pdf links and 69 other links on seed page.
+2026-01-05 23:10:08,730 [INFO] Seed: https://lawcommission.gov.np/pages/list-volume-regulation/
+2026-01-05 23:10:12,333 [INFO] Found 0 pdf links and 76 other links on seed page.
+2026-01-05 23:10:12,334 [INFO] Seed: https://lawcommission.gov.np/category/repealed-law/
+2026-01-05 23:10:15,390 [INFO] Found 6 pdf links and 66 other links on seed page.
+2026-01-05 23:10:15,390 [INFO] Seed: https://lawcommission.gov.np/category/1807/
+2026-01-05 23:10:19,098 [INFO] Found 1 pdf links and 59 other links on seed page.
+2026-01-05 23:10:19,099 [INFO] Seed: https://lawcommission.gov.np/category/repealed-constitution/
+2026-01-05 23:10:22,882 [INFO] Found 6 pdf links and 64 other links on seed page.
+2026-01-05 23:10:22,883 [INFO] Wrote 12 discovered links -> data/sources/discovered_links.csv
+2026-01-05 23:13:37,537 [INFO] Downloads complete -> data/raw/pdfs

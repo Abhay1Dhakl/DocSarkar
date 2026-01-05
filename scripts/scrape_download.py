@@ -1,27 +1,39 @@
 from pathlib import Path
+import hashlib
 import logging
+import re
+from urllib.parse import urlparse
 from tqdm import tqdm
 
 from govscrape.config import ScrapeConfig
-from govscrape.io_utils import read_csv_dicts, ensure_parent
+from govscrape.io_utils import read_csv_dicts, ensure_path_exists
 from govscrape.http import HttpClient
 from govscrape.robots import allowed_by_robots
 
 def setup_logger(log_file: Path) -> None:
-    ensure_parent(log_file)
+    ensure_path_exists(log_file)
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s [%(levelname)s] %(message)s",
         handlers=[logging.FileHandler(log_file, encoding="utf-8"), logging.StreamHandler()],
     )
 
-def safe_filename(url: str) -> str:
-    # basic filename extraction
-    base = url.split("?")[0].split("#")[0].rstrip("/")
-    name = base.split("/")[-1] or "download.pdf"
+def safe_filename(url: str, max_len: int = 120) -> str:
+    # Keep filenames short and ASCII-only to avoid OS limits.
+    parsed = urlparse(url)
+    name = (parsed.path.rstrip("/").split("/")[-1] or "download.pdf")
     if not name.lower().endswith(".pdf"):
         name += ".pdf"
-    return name
+    name = re.sub(r"[^A-Za-z0-9._-]+", "_", name)
+    if len(name) <= max_len:
+        return name
+    ext = ".pdf" if name.lower().endswith(".pdf") else ""
+    stem = name[:-len(ext)] if ext else name
+    digest = hashlib.sha1(url.encode("utf-8")).hexdigest()[:12]
+    keep = max_len - len(ext) - len(digest) - 1
+    if keep < 1:
+        return f"{digest}{ext}"
+    return f"{stem[:keep]}-{digest}{ext}"
 
 def main():
     cfg = ScrapeConfig()
